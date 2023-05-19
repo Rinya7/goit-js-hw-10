@@ -1,21 +1,4 @@
-import './css/styles.css';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-var debounce = require('lodash.debounce');
-
-const DEBOUNCE_DELAY = 300;
-const URL_BASE_API = 'https://restcountries.com/v3.1/name/';
-
-const refs = {
-  inputCountry: document.querySelector('#search-box'),
-  countryOutList: document.querySelector('.country-list'),
-  countryInfo: document.querySelector('.country-info'),
-};
-
-//console.log(refs.countryOut);
-refs.inputCountry.addEventListener(
-  'input',
-  debounce(fetchCountries, DEBOUNCE_DELAY)
-);
+export { getFullName };
 
 function fetchCountries(name) {
   if (name.target.value.trim()) {
@@ -62,10 +45,10 @@ function createCountryList(arr) {
     .map(
       ({ name: { common }, flags: { svg, alt } }) =>
         (refs.countryInfo.innerHTML = `
-        <h2><img src="${svg}" alt="${alt}" width= "25" height = "25">
-        ${common}
-        </h2>
-`)
+          <h2><img src="${svg}" alt="${alt}" width= "25" height = "25">
+          ${common}
+          </h2>
+  `)
     )
     .join('');
 }
@@ -81,22 +64,22 @@ function createCountryInfo(arr) {
         languages,
       }) =>
         (refs.countryInfo.innerHTML = `
-<ul>
-<li>
-  <h1><img src="${svg}" alt="${alt}" width= "250" height = "250">
-  ${common}
-  </h1>
-  </li>
+  <ul>
   <li>
-  <h2>CAPITAL: ${capital}</h2>
-  </li>
-  <li>
-  <h2>POPULATION: ${population}</h2>
-  </li>
-  <li>
-  <h2>LANGUAGES: ${Object.values(languages)}</h2>
-  </li>
-</ul>`)
+    <h1><img src="${svg}" alt="${alt}" width= "250" height = "250">
+    ${common}
+    </h1>
+    </li>
+    <li>
+    <h2>CAPITAL: ${capital}</h2>
+    </li>
+    <li>
+    <h2>POPULATION: ${population}</h2>
+    </li>
+    <li>
+    <h2>LANGUAGES: ${Object.values(languages)}</h2>
+    </li>
+  </ul>`)
     )
     .join('');
 }
