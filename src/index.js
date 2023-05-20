@@ -1,7 +1,7 @@
 import './css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 var debounce = require('lodash.debounce');
-//import fetchCountries from './fetchCountries.js';
+//import fetch from './fetchCountries.js';
 
 const DEBOUNCE_DELAY = 300;
 const URL_BASE_API = 'https://restcountries.com/v3.1/name/';
