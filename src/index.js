@@ -16,16 +16,6 @@ refs.inputCountry.addEventListener('input', debounce(fetchFun, DEBOUNCE_DELAY));
 
 function fetchFun(name) {
   if (name.target.value.trim()) {
-    //return fetch(
-    //  `${URL_BASE_API}${name.target.value.trim()}?fields=name,capital,population,flags,languages`
-    //)
-
-    //  .then(resp => {
-    //    if (!resp.ok) {
-    //      throw new Error(resp.status);
-    //    }
-    //    return resp.json();
-    //  })
     fetchCountries(name)
       .then(data => meinCheck(data))
       .catch(() => {
@@ -37,6 +27,10 @@ function fetchFun(name) {
       });
   }
 }
+/**
+ * получаем ответ от сервера, количество стран которое есть по нашему запросу и проверяем по условиям
+ * @param {масив стран} data
+ */
 function meinCheck(data) {
   if (data.length > 10 || data.length < 1) {
     Notify.info('Too many matches found. Please enter a more specific name.');
