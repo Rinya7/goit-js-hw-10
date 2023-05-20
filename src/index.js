@@ -4,7 +4,6 @@ var debounce = require('lodash.debounce');
 import { fetchCountries } from './js/fetchCountries.js';
 
 const DEBOUNCE_DELAY = 300;
-//const URL_BASE_API = 'https://restcountries.com/v3.1/name/';
 
 const refs = {
   inputCountry: document.querySelector('#search-box'),
@@ -20,8 +19,6 @@ function fetchFun(name) {
       .then(data => meinCheck(data))
       .catch(() => {
         Notify.failure('Oops, there is no country with that name');
-        //cleanBlok(refs.countryInfo);
-        //cleanBlok(refs.countryOutList);
         cleanBlokCountryList();
         cleanBlokCountryInfo();
       });
@@ -34,20 +31,16 @@ function fetchFun(name) {
 function meinCheck(data) {
   if (data.length > 10 || data.length < 1) {
     Notify.info('Too many matches found. Please enter a more specific name.');
-    //cleanBlok(refs.countryInfo);
-    //cleanBlok(refs.countryOutList);
     cleanBlokCountryList();
     cleanBlokCountryInfo();
   }
   if (data.length <= 10 && data.length >= 2) {
-    Notify.failure('Рисуем спосок стран');
+    Notify.success('Рисуем спосок стран');
     createCountryList(data);
-    //cleanBlok(refs.countryInfo);
     cleanBlokCountryInfo();
   }
   if (data.length === 1) {
-    Notify.failure('Рисуем одну страну');
-    //cleanBlok(refs.countryOutList);
+    Notify.success('Рисуем одну страну');
     cleanBlokCountryList();
     createCountryInfo(data);
   }
@@ -97,13 +90,13 @@ function createCountryInfo(arr) {
     .join(''));
 }
 
-//function cleanBlok(block) {
-//  block.innerHTML = '';
-//}
-
 function cleanBlokCountryList() {
   refs.countryOutList.innerHTML = '';
 }
 function cleanBlokCountryInfo() {
   refs.countryInfo.innerHTML = '';
 }
+
+//function cleanBlok(block) {
+//  block.innerHTML = '';
+//}
