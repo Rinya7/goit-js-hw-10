@@ -79,7 +79,7 @@ function createCountryInfo(arr) {
         (refs.countryInfo.innerHTML = `
 <ul>
 <li>
-  <h1><img src="${svg}" alt="${alt}" width= "250" height = "250">
+  <h1><img src="${svg}" alt="${alt}" width= "25" height = "25">
   ${common}
   </h1>
   </li>
