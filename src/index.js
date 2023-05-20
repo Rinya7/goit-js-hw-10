@@ -1,10 +1,10 @@
 import './css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 var debounce = require('lodash.debounce');
-//import fetch from './fetchCountries.js';
+import { fetchCountries } from './js/fetchCountries.js';
 
 const DEBOUNCE_DELAY = 300;
-const URL_BASE_API = 'https://restcountries.com/v3.1/name/';
+//const URL_BASE_API = 'https://restcountries.com/v3.1/name/';
 
 const refs = {
   inputCountry: document.querySelector('#search-box'),
@@ -12,24 +12,23 @@ const refs = {
   countryInfo: document.querySelector('.country-info'),
 };
 
-refs.inputCountry.addEventListener(
-  'input',
-  debounce(fetchCountries, DEBOUNCE_DELAY)
-);
+refs.inputCountry.addEventListener('input', debounce(fetchFun, DEBOUNCE_DELAY));
 
-function fetchCountries(name) {
+function fetchFun(name) {
   if (name.target.value.trim()) {
-    return fetch(
-      `${URL_BASE_API}${name.target.value.trim()}?fields=name,capital,population,flags,languages`
-    )
-      .then(resp => {
-        if (!resp.ok) {
-          throw new Error(resp.status);
-        }
-        return resp.json();
-      })
+    //return fetch(
+    //  `${URL_BASE_API}${name.target.value.trim()}?fields=name,capital,population,flags,languages`
+    //)
+
+    //  .then(resp => {
+    //    if (!resp.ok) {
+    //      throw new Error(resp.status);
+    //    }
+    //    return resp.json();
+    //  })
+    fetchCountries(name)
       .then(data => meinCheck(data))
-      .catch(err => {
+      .catch(() => {
         Notify.failure('Oops, there is no country with that name');
         //cleanBlok(refs.countryInfo);
         //cleanBlok(refs.countryOutList);
