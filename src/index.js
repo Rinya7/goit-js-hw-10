@@ -16,8 +16,12 @@ function fetchFun(name) {
   if (name.target.value.trim()) {
     fetchCountries(name)
       .then(data => meinCheck(data))
-      .catch(() => {
-        Notify.failure('Oops, there is no country with that name');
+      .catch(err => {
+        if (err.message === '404') {
+          Notify.failure('Oops, there is no country with that name');
+        } else {
+          Notify.failure(err.message);
+        }
         cleanBlokCountryList();
         cleanBlokCountryInfo();
       });
